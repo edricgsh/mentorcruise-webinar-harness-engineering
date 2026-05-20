@@ -1,3 +1,4 @@
+require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
 const express = require('express');
 const cors = require('cors');
 const Database = require('better-sqlite3');
@@ -38,4 +39,5 @@ app.delete('/todos/:id', (req, res) => {
   res.json({ ok: true });
 });
 
-app.listen(3001, () => console.log('Backend running on http://localhost:3001'));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));

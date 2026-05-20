@@ -12,52 +12,38 @@ duration: 35min
 
 # AI Coding That Actually Works
 
-From frustration to flow — it's about the harness
+It's not the model. It's the setup.
 
-<div class="abs-br m-6 text-xl opacity-50 text-sm">MentorCruise Webinar · 2026</div>
+<div class="abs-br m-6 opacity-40 text-sm">MentorCruise Webinar · 2026</div>
 
 ---
 layout: center
 class: text-center
 ---
 
-# Why do some people hate AI-generated code...
+# Why does AI write great code for some people...
 
-<v-click>
+## ...and garbage for others?
 
-## ...and others can't live without it?
-
-</v-click>
-
-<v-click>
-
-<div class="mt-8 text-2xl opacity-70">Same tool. Different results.</div>
-
-</v-click>
+<div class="mt-8 text-xl opacity-60">Same model. Same tool. Wildly different results.</div>
 
 ---
 layout: center
+class: text-center
 ---
 
-# The real variable: **Context**
+# Two things decide the outcome
 
-<div class="grid grid-cols-2 gap-12 mt-8 text-left">
-<div v-click>
-
-### What AI sees
-- Your prompt
-- The conversation history
-- Loaded files & skills
-- System instructions
-
+<div class="grid grid-cols-2 gap-16 mt-10 text-left">
+<div class="text-center">
+  <div class="text-5xl mb-4">🧠</div>
+  <div class="text-2xl font-bold">Context</div>
+  <div class="mt-2 opacity-60">What AI knows going in</div>
 </div>
-<div v-click>
-
-### What AI doesn't see
-- What you tried 3 messages ago
-- The file you forgot to open
-- The constraint you assumed was obvious
-
+<div class="text-center">
+  <div class="text-5xl mb-4">🔧</div>
+  <div class="text-2xl font-bold">Harness</div>
+  <div class="mt-2 opacity-60">How it checks its own work</div>
 </div>
 </div>
 
@@ -66,144 +52,136 @@ layout: center
 class: text-center
 ---
 
-<div class="text-6xl font-bold mb-4">Garbage in</div>
-<div class="text-4xl opacity-50">garbage out</div>
-
-<v-click>
-<div class="mt-12 text-2xl">AI doesn't know what you know.</div>
-<div class="text-xl opacity-60 mt-2">It only works with what's in the window.</div>
-</v-click>
+# Context
 
 ---
 
-# The Other Half: Harness
+# What's actually in your AI's head right now?
 
-<div class="text-xl opacity-70 mb-8">How do you let AI validate its own output?</div>
-
-<div class="grid grid-cols-3 gap-6 mt-4">
-
-<div v-click class="p-4 rounded border border-white/20">
-  <div class="text-2xl mb-2">🪵</div>
-  <div class="font-bold">Log inspection</div>
-  <div class="text-sm opacity-60 mt-1">AI reads what the app actually did</div>
-</div>
-
-<div v-click class="p-4 rounded border border-white/20">
-  <div class="text-2xl mb-2">🗄️</div>
-  <div class="font-bold">Database checking</div>
-  <div class="text-sm opacity-60 mt-1">Verify data, not just code</div>
-</div>
-
-<div v-click class="p-4 rounded border border-white/20">
-  <div class="text-2xl mb-2">🧪</div>
-  <div class="font-bold">API testing</div>
-  <div class="text-sm opacity-60 mt-1">AI runs the tests itself</div>
-</div>
-
-</div>
-
-<v-click>
-<div class="mt-10 text-center text-xl">
-A good harness = AI that catches its own mistakes
-</div>
-</v-click>
-
----
-layout: center
-class: text-center
----
-
-# Part 1
-
-<div class="text-4xl font-bold mt-4">Context is Everything</div>
-
----
-
-# What goes into every AI conversation?
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
+<div class="grid grid-cols-2 gap-10 mt-6 text-left">
 <div>
 
-<v-click>
+**The system prompt**
+Everything the tool loaded before you typed anything — skills, settings, instructions. Probably hundreds of lines. You haven't read it.
 
-**System prompt**
-- Theme, instructions, skills
-- Can be hundreds of lines long
-- You probably haven't read it
-
-</v-click>
-
-<v-click>
-
-**Conversation history**
-- Every message back and forth
-- Gets compressed as it grows
-- Old context fades away
-
-</v-click>
+**Your conversation history**
+Every message back and forth. Gets compressed as it grows. Old context quietly disappears.
 
 </div>
-
 <div>
 
-<v-click>
+**Files you opened**
+Only what you explicitly loaded. AI doesn't browse your repo on its own.
 
-**Loaded context**
-- Files you've read
-- Tools that were called
-- Agent sub-results
-
-</v-click>
-
-<v-click>
-
-**Skills / MCP tools**
-- Each adds to the system prompt
-- Too many = noise
-- Install selectively
-
-</v-click>
+**Loaded skills / MCP tools**
+Each one adds more to the system prompt. Install too many and it's noise.
 
 </div>
 </div>
 
 ---
+layout: center
+class: text-center
+---
 
-# Tips to Preserve Context
+<div class="text-7xl font-bold">Garbage in,</div>
+<div class="text-5xl opacity-40 mt-2">garbage out.</div>
 
-<div class="space-y-6 mt-4">
+<div class="mt-12 text-xl">AI doesn't know what you know. It only works with what's in the window.</div>
 
-<div v-click class="flex gap-4 items-start">
-  <div class="text-2xl">🤖</div>
-  <div>
-    <div class="font-bold">Use subagents for isolated work</div>
-    <div class="text-sm opacity-60">Keeps the main thread clean — subagents don't pollute your context</div>
-  </div>
+---
+
+# The mistakes people make
+
+<div class="space-y-6 mt-6 text-lg">
+
+**Vague prompts with no file context**
+"Fix the bug" — which bug? What file? What does it look like now?
+
+**Letting context rot**
+Long sessions compress old messages. The AI from message 50 isn't the same AI from message 5.
+
+**Installing every skill they find online**
+Each skill bloats the system prompt. More isn't better.
+
+**Not reading the system prompt**
+You're flying blind if you don't know what instructions Claude already has.
+
 </div>
 
-<div v-click class="flex gap-4 items-start">
-  <div class="text-2xl">🧱</div>
-  <div>
-    <div class="font-bold">Caveman plugin</div>
-    <div class="text-sm opacity-60">Forces structured, explicit context on every prompt</div>
-  </div>
+---
+
+# How to stay sharp
+
+<div class="space-y-5 mt-6 text-lg">
+
+**Use subagents for isolated tasks**
+Keeps the main thread clean. Subagents don't pollute your context.
+
+**Load skills intentionally**
+Start with nothing. Add one when you actually need it.
+
+**Watch the status line**
+Claude Code shows token usage. Know when you're running low on runway.
+
+**Demo: read the system prompt**
+You can literally ask Claude what it knows. Most people never do.
+
 </div>
 
-<div v-click class="flex gap-4 items-start">
-  <div class="text-2xl">📦</div>
-  <div>
-    <div class="font-bold">Load skills intentionally</div>
-    <div class="text-sm opacity-60"><code>npx skills</code> · Don't install everything you find — add as you need</div>
-  </div>
+---
+layout: center
+class: text-center
+---
+
+# Demo — what does Claude see right now?
+
+<div class="mt-6 opacity-50 text-lg">Ask Claude to summarise its own system prompt</div>
+
+---
+layout: center
+class: text-center
+---
+
+# Harness
+
+---
+
+# The core idea
+
+<div class="text-2xl mt-8 leading-relaxed">
+
+AI writes code. Then it needs to **run** the code, **read** the output, and **fix** what's wrong — without you babysitting every step.
+
 </div>
 
-<div v-click class="flex gap-4 items-start">
-  <div class="text-2xl">📊</div>
-  <div>
-    <div class="font-bold">Status line in Claude Code</div>
-    <div class="text-sm opacity-60">See token usage in real time — know when you're running out of runway</div>
-  </div>
+<div class="mt-10 text-xl opacity-60">That loop is the harness.</div>
+
+---
+
+# Three tools that close the loop
+
+<div class="grid grid-cols-3 gap-8 mt-8 text-center">
+
+<div class="p-6 rounded-lg border border-white/20">
+  <div class="text-4xl mb-4">🪵</div>
+  <div class="text-xl font-bold">Log Inspector</div>
+  <div class="mt-3 text-sm opacity-50">AI reads what the app actually did — not what it thinks it did</div>
+  <div class="mt-4 font-mono text-xs opacity-30">skill: log-tail</div>
+</div>
+
+<div class="p-6 rounded-lg border border-white/20">
+  <div class="text-4xl mb-4">🗄️</div>
+  <div class="text-xl font-bold">DB Inspector</div>
+  <div class="mt-3 text-sm opacity-50">Check the data, not just the code that writes it</div>
+  <div class="mt-4 font-mono text-xs opacity-30">skill: sqlite-inspector</div>
+</div>
+
+<div class="p-6 rounded-lg border border-white/20">
+  <div class="text-4xl mb-4">🧪</div>
+  <div class="text-xl font-bold">API Tester</div>
+  <div class="mt-3 text-sm opacity-50">AI hits the endpoints itself and reads the results</div>
+  <div class="mt-4 font-mono text-xs opacity-30">skill: api-test</div>
 </div>
 
 </div>
@@ -213,73 +191,14 @@ layout: center
 class: text-center
 ---
 
-# Demo
+# Demo — two projects, live harness
 
-<div class="text-2xl opacity-60 mt-4">Understanding your system prompt</div>
-
-<div class="mt-8 text-lg opacity-40">What's Claude actually seeing right now?</div>
-
----
-layout: center
-class: text-center
----
-
-# Part 2
-
-<div class="text-4xl font-bold mt-4">Building a Basic Harness</div>
-
----
-
-# The Harness Setup
-
-<div class="text-lg opacity-60 mb-6">An environment where AI can write code <em>and</em> verify it</div>
-
-<div class="grid grid-cols-3 gap-6">
-
-<div v-click class="p-5 rounded-lg border border-white/20 text-center">
-  <div class="text-3xl mb-3">🪵</div>
-  <div class="font-bold text-lg">Log Inspector</div>
-  <div class="text-sm opacity-50 mt-2">AI reads app logs to confirm behavior</div>
-  <div class="mt-3 font-mono text-xs opacity-40">skill: log-tail</div>
-</div>
-
-<div v-click class="p-5 rounded-lg border border-white/20 text-center">
-  <div class="text-3xl mb-3">🗄️</div>
-  <div class="font-bold text-lg">DB Inspector</div>
-  <div class="text-sm opacity-50 mt-2">Query local SQLite to verify data</div>
-  <div class="mt-3 font-mono text-xs opacity-40">skill: sqlite-inspector</div>
-</div>
-
-<div v-click class="p-5 rounded-lg border border-white/20 text-center">
-  <div class="text-3xl mb-3">🧪</div>
-  <div class="font-bold text-lg">API Tester</div>
-  <div class="text-sm opacity-50 mt-2">AI runs endpoint tests itself</div>
-  <div class="mt-3 font-mono text-xs opacity-40">skill: api-test</div>
-</div>
-
-</div>
-
-<v-click>
-<div class="mt-8 text-center text-xl">
-  AI writes → AI runs → AI reads → AI fixes
-</div>
-</v-click>
-
----
-layout: center
-class: text-center
----
-
-# Demo
-
-<div class="text-2xl opacity-60 mt-4">Two projects, live harness</div>
-
-<div class="mt-8 space-y-2 text-left inline-block">
-  <div class="text-sm opacity-40">→ Backend + Frontend running</div>
-  <div class="text-sm opacity-40">→ AI inspects logs</div>
-  <div class="text-sm opacity-40">→ AI checks the database</div>
-  <div class="text-sm opacity-40">→ AI runs API tests</div>
-  <div class="text-sm opacity-40">→ AI fixes what it broke</div>
+<div class="mt-8 space-y-2 opacity-50 text-left inline-block text-sm">
+  <div>→ Start backend + frontend</div>
+  <div>→ AI inspects logs</div>
+  <div>→ AI queries the database</div>
+  <div>→ AI runs API tests</div>
+  <div>→ AI finds the bug, fixes it</div>
 </div>
 
 ---
@@ -287,20 +206,14 @@ layout: center
 class: text-center
 ---
 
-# The takeaway
+# That's the whole game
 
-<v-click>
-<div class="text-3xl font-bold mt-6">Context + Harness</div>
-</v-click>
+<div class="mt-8 text-2xl">
+Give AI a clear picture of what to do.<br/>
+Give it the tools to know if it worked.
+</div>
 
-<v-click>
-<div class="text-xl opacity-60 mt-4">Give AI a clear picture of what to do.</div>
-<div class="text-xl opacity-60">Give it the tools to know if it worked.</div>
-</v-click>
-
-<v-click>
-<div class="mt-10 text-4xl">That's it.</div>
-</v-click>
+<div class="mt-10 text-5xl font-bold">Context + Harness.</div>
 
 ---
 layout: center
