@@ -25,7 +25,7 @@ class: text-center
 
 ## ...and garbage for others?
 
-<div class="mt-8 text-xl opacity-60">Same model. Same tool. Wildly different results.</div>
+<div class="mt-8 text-xl opacity-60">Same model. Same tool. But wildy different experience</div>
 
 ---
 layout: center
@@ -38,13 +38,27 @@ class: text-center
 <div class="text-center">
   <div class="text-5xl mb-4">🧠</div>
   <div class="text-2xl font-bold">Context</div>
-  <div class="mt-2 opacity-60">What AI knows going in</div>
+  <div class="mt-2 opacity-60">What's going in the context window</div>
 </div>
 <div class="text-center">
   <div class="text-5xl mb-4">🔧</div>
   <div class="text-2xl font-bold">Harness</div>
-  <div class="mt-2 opacity-60">How it checks its own work</div>
+  <div class="mt-2 opacity-60">The environment you configure for the AI agent to run in</div>
 </div>
+</div>
+
+---
+
+# The common mistakes people make
+
+<div class="space-y-6 mt-6 text-lg">
+
+**Letting context rot**
+Long sessions compress old messages. AI from message 50 has forgotten what you agreed on at message 5. Use `/clear` between unrelated tasks.
+
+**No way for the AI to verify its own work**
+AI performs dramatically better when it can check itself — run tests, read logs, hit endpoints. Without that loop, it's just guessing.
+
 </div>
 
 ---
@@ -56,62 +70,33 @@ class: text-center
 
 ---
 
-# What's actually in your AI's head right now?
+# What's actually in your AI's context right now?
 
-<div class="grid grid-cols-2 gap-10 mt-6 text-left">
-<div>
+<div class="grid grid-cols-3 gap-8 mt-8 text-center">
 
-**The system prompt**
-Everything the tool loaded before you typed anything — skills, settings, instructions. Probably hundreds of lines. You haven't read it.
-
-**Your conversation history**
-Every message back and forth. Gets compressed as it grows. Old context quietly disappears.
-
-</div>
-<div>
-
-**Files you opened**
-Only what you explicitly loaded. AI doesn't browse your repo on its own.
-
-**Loaded skills / MCP tools**
-Each one adds more to the system prompt. Install too many and it's noise.
-
-</div>
+<div class="p-4 rounded-lg border border-white/20">
+  <div class="text-3xl mb-3">⚙️</div>
+  <div class="font-bold">System prompt + tools</div>
+  <div class="mt-2 text-sm opacity-50">Set directly via settings or --system-prompt. CLAUDE.md, skills, and MCP tools also get injected into it.</div>
 </div>
 
----
-layout: center
-class: text-center
----
+<div class="p-4 rounded-lg border border-white/20">
+  <div class="text-3xl mb-3">🛠️</div>
+  <div class="font-bold">Skills & MCP tools</div>
+  <div class="mt-2 text-sm opacity-50">Every loaded skill adds tokens. Install too many and it becomes noise.</div>
+</div>
 
-<div class="text-7xl font-bold">Garbage in,</div>
-<div class="text-5xl opacity-40 mt-2">garbage out.</div>
-
-<div class="mt-12 text-xl">AI doesn't know what you know. It only works with what's in the window.</div>
-
----
-
-# The mistakes people make
-
-<div class="space-y-6 mt-6 text-lg">
-
-**Vague prompts with no file context**
-"Fix the bug" — which bug? What file? What does it look like now?
-
-**Letting context rot**
-Long sessions compress old messages. The AI from message 50 isn't the same AI from message 5.
-
-**Installing every skill they find online**
-Each skill bloats the system prompt. More isn't better.
-
-**Not reading the system prompt**
-You're flying blind if you don't know what instructions Claude already has.
+<div class="p-4 rounded-lg border border-white/20">
+  <div class="text-3xl mb-3">💬</div>
+  <div class="font-bold">Messages</div>
+  <div class="mt-2 text-sm opacity-50">Your full conversation history. Gets compressed as it grows — old context quietly disappears.</div>
+</div>
 
 </div>
 
 ---
 
-# How to stay sharp
+# Some tips to stay keep the context window size manageable
 
 <div class="space-y-5 mt-6 text-lg">
 
@@ -124,8 +109,6 @@ Start with nothing. Add one when you actually need it.
 **Watch the status line**
 Claude Code shows token usage. Know when you're running low on runway.
 
-**Demo: read the system prompt**
-You can literally ask Claude what it knows. Most people never do.
 
 </div>
 
@@ -134,9 +117,9 @@ layout: center
 class: text-center
 ---
 
-# Demo — what does Claude see right now?
+# Demo — controlling what Claude sees
 
-<div class="mt-6 opacity-50 text-lg">Ask Claude to summarise its own system prompt</div>
+<div class="mt-6 opacity-50 text-lg">CLAUDE.md · Skills · MCP tools — what's loaded, what's not</div>
 
 ---
 layout: center
@@ -149,39 +132,80 @@ class: text-center
 
 # The core idea
 
-<div class="text-2xl mt-8 leading-relaxed">
+<div class="text-xl mt-8 space-y-4">
 
-AI writes code. Then it needs to **run** the code, **read** the output, and **fix** what's wrong — without you babysitting every step.
+**AI's job:**
+- Write the code
+- Run it and read the output
+- Fix what's wrong — without you babysitting every step
+
+**Your job as a human:**
+- Set up the environment at the start
+- Define the spec and success criteria clearly for each step
+- Validate the output at the end
 
 </div>
 
-<div class="mt-10 text-xl opacity-60">That loop is the harness.</div>
+---
+
+# Setting up the environment
+
+<div class="space-y-5 mt-6 text-lg">
+
+**Give AI the right tools**
+Skills for log reading, API testing, and DB inspection — so it can verify its own work, not just write code and hope.
+
+**Isolate environments with git worktrees**
+Separate ports and databases per branch. Parallel features never step on each other, and AI can run two tasks simultaneously.
+
+**Have a dedicated output area**
+A folder for test reports, logs, and assertions. AI writes there; you review there.
+
+</div>
 
 ---
 
-# Three tools that close the loop
+# Write the spec and success criteria
+
+<div class="space-y-5 mt-6 text-lg">
+
+**Vague prompts produce vague results**
+*"Add a filter feature"* gives you something. *"GET /todos?status=done returns only completed items, 200 OK, empty array if none"* gives you something correct.
+
+**The spec is the AI's exit condition**
+Without one, done means *"I stopped typing"*. With one, the AI checks itself — runs the endpoint, reads the result, fixes the delta.
+
+**Formats that work**
+- API contract: route · status code · response shape
+- Acceptance criteria: *given X, when Y, then Z*
+- A failing test the AI must make pass
+
+**Write it before the first prompt** — not after you see the output.
+
+</div>
+
+---
+
+# Validate the output
 
 <div class="grid grid-cols-3 gap-8 mt-8 text-center">
 
 <div class="p-6 rounded-lg border border-white/20">
-  <div class="text-4xl mb-4">🪵</div>
-  <div class="text-xl font-bold">Log Inspector</div>
-  <div class="mt-3 text-sm opacity-50">AI reads what the app actually did — not what it thinks it did</div>
-  <div class="mt-4 font-mono text-xs opacity-30">skill: log-tail</div>
+  <div class="text-4xl mb-4">👁️</div>
+  <div class="text-xl font-bold">Code review</div>
+  <div class="mt-3 text-sm opacity-50">Read the diff before you ship it. AI-generated code can be subtly wrong in ways tests don't catch — logic errors, missing edge cases, security gaps.</div>
 </div>
 
 <div class="p-6 rounded-lg border border-white/20">
-  <div class="text-4xl mb-4">🗄️</div>
-  <div class="text-xl font-bold">DB Inspector</div>
-  <div class="mt-3 text-sm opacity-50">Check the data, not just the code that writes it</div>
-  <div class="mt-4 font-mono text-xs opacity-30">skill: sqlite-inspector</div>
+  <div class="text-4xl mb-4">📄</div>
+  <div class="text-xl font-bold">Read the test output</div>
+  <div class="mt-3 text-sm opacity-50">Don't just ask "did it pass?" — read what the AI actually tested. A green report with shallow assertions is still a gap.</div>
 </div>
 
 <div class="p-6 rounded-lg border border-white/20">
-  <div class="text-4xl mb-4">🧪</div>
-  <div class="text-xl font-bold">API Tester</div>
-  <div class="mt-3 text-sm opacity-50">AI hits the endpoints itself and reads the results</div>
-  <div class="mt-4 font-mono text-xs opacity-30">skill: api-test</div>
+  <div class="text-4xl mb-4">🔍</div>
+  <div class="text-xl font-bold">Cross-check data & logs</div>
+  <div class="mt-3 text-sm opacity-50">Does the database actually contain what you expect? Do the logs show the right requests? Trust evidence, not the AI's summary of evidence.</div>
 </div>
 
 </div>
@@ -193,27 +217,7 @@ class: text-center
 
 # Demo — two projects, live harness
 
-<div class="mt-8 space-y-2 opacity-50 text-left inline-block text-sm">
-  <div>→ Start backend + frontend</div>
-  <div>→ AI inspects logs</div>
-  <div>→ AI queries the database</div>
-  <div>→ AI runs API tests</div>
-  <div>→ AI finds the bug, fixes it</div>
-</div>
-
----
-layout: center
-class: text-center
----
-
-# That's the whole game
-
-<div class="mt-8 text-2xl">
-Give AI a clear picture of what to do.<br/>
-Give it the tools to know if it worked.
-</div>
-
-<div class="mt-10 text-5xl font-bold">Context + Harness.</div>
+Writing two features simultaneously
 
 ---
 layout: center
