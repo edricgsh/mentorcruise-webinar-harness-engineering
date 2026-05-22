@@ -5,10 +5,12 @@ const API = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    fetch(`${API}/todos`).then(r => r.json()).then(setTodos);
-  }, []);
+    const url = filter === 'all' ? `${API}/todos` : `${API}/todos?status=${filter}`;
+    fetch(url).then(r => r.json()).then(setTodos);
+  }, [filter]);
 
   async function addTodo(e) {
     e.preventDefault();

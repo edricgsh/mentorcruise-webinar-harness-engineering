@@ -28,8 +28,13 @@ Manage todo app processes. Ports are automatically resolved from the current git
 
 Worktrees live at:
 ```
-/Users/siehuaigan/project/external/_worktrees/<branch-slug>/
+/tmp/demo_mentorcruise_webinar/<branch-slug>/
 ```
+
+> **CRITICAL**: Always `cd` into the worktree directory before running any scripts.
+> Running `scripts/start-with-log.sh` from the main repo will start the backend
+> from the main repo's `backend/` folder — opening the wrong `todos.db` and
+> causing "attempt to write a readonly database" errors.
 
 ---
 
@@ -39,16 +44,20 @@ Worktrees live at:
 ```bash
 cd /Users/siehuaigan/project/external/demo_mentorcruise_webinar
 scripts/new-worktree.sh feature/filters
+# then cd into it before starting:
+cd /tmp/demo_mentorcruise_webinar/feature-filters
 ```
 
-### Check status (current branch)
+### Check status
 ```bash
-cd /Users/siehuaigan/project/external/demo_mentorcruise_webinar
+cd /tmp/demo_mentorcruise_webinar/feature-filters
 scripts/app-ctl.sh status all
 ```
 
 ### Start the app
 ```bash
+# Always cd into the worktree first!
+cd /tmp/demo_mentorcruise_webinar/<branch-slug>
 scripts/start-with-log.sh all        # both
 scripts/start-with-log.sh backend    # backend only
 scripts/start-with-log.sh frontend   # frontend only

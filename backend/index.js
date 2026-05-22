@@ -18,7 +18,15 @@ db.exec(`
 `);
 
 app.get('/todos', (req, res) => {
-  const todos = db.prepare('SELECT * FROM todos').all();
+  const { status } = req.query;
+  let todos;
+  if (status === 'active') {
+    todos = db.prepare('SELECT * FROM todos WHERE completed = 0').all();
+  } else if (status === 'completed') {
+    todos = db.prepare('SELECT * FROM todos WHERE completed = 1').all();
+  } else {
+    todos = db.prepare('SELECT * FROM todos').all();
+  }
   res.json(todos.map(t => ({ ...t, completed: !!t.completed })));
 });
 

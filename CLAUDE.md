@@ -15,9 +15,9 @@ demo_mentorcruise_webinar/   ← main repo (branch: main)
   .env                       ← NOT committed; ports for this worktree
   .env.example               ← committed template
 
-../_worktrees/               ← git worktrees live here (sibling of repo)
-  feature-filters/           ← branch: feature/filters
-  feature-due-dates/         ← branch: feature/due-dates
+/tmp/demo_mentorcruise_webinar/  ← git worktrees live here (cleared on reboot)
+  feature-filters/               ← branch: feature/filters
+  feature-due-dates/             ← branch: feature/due-dates
 ```
 
 ---
@@ -76,7 +76,7 @@ scripts/app-ctl.sh restart backend
 scripts/new-worktree.sh feature/my-feature
 
 # 2. cd into it and start
-cd /Users/siehuaigan/project/external/_worktrees/feature-my-feature
+cd /tmp/demo_mentorcruise_webinar/feature-my-feature
 scripts/start-with-log.sh all
 ```
 

@@ -1,0 +1,124 @@
+#!/usr/bin/env bash
+# claude-skills — fzf-powered skill selector for Claude Code
+#
+# Scans ~/.claude/skills, .claude/skills, ~/.agents/skills, and .agents/skills
+# for skill directories (each containing a SKILL.md).
+# Lets you multi-select skills with TAB, then launches:
+#   claude --add-dir <dir1> --add-dir <dir2> ...
+#
+# Any extra arguments are passed through to claude (e.g. -p "prompt", --model sonnet).
+
+set -euo pipefail
+
+SKILL_SEARCH_DIRS=(
+  "${HOME}/.claude/skills"
+  "${HOME}/.agents/skills"
+)
+
+# If we're inside a git repo, also include project-level skill dirs
+PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+if [[ -n "$PROJECT_ROOT" ]]; then
+  SKILL_SEARCH_DIRS+=(
+    "${PROJECT_ROOT}/.claude/skills"
+    "${PROJECT_ROOT}/.agents/skills"
+  )
+fi
+
+# ---------------------------------------------------------------------------
+# Collect every skill directory that contains a SKILL.md
+# Output: <display-name>\t<absolute-path>
+# ---------------------------------------------------------------------------
+collect_skills() {
+  local seen_marker
+  seen_marker="$(mktemp)"
+  trap "rm -f '$seen_marker'" RETURN
+
+  for base in "${SKILL_SEARCH_DIRS[@]}"; do
+    [[ -d "$base" ]] || continue
+    for skill_dir in "$base"/*/; do
+      [[ -d "$skill_dir" ]] || continue
+      local skill_md="${skill_dir}SKILL.md"
+      [[ -f "$skill_md" ]] || continue
+
+      # Resolve to absolute, dedup
+      local abs_dir
+      abs_dir="$(cd "$skill_dir" && pwd)"
+      if grep -qxF "$abs_dir" "$seen_marker" 2>/dev/null; then
+        continue
+      fi
+      echo "$abs_dir" >> "$seen_marker"
+
+      # Extract name from SKILL.md frontmatter (YAML "name:" field)
+      local name
+      name="$(awk '/^---/{in_front=!in_front; next} in_front && /^name:/{gsub(/^name:\s*/,""); print; exit}' "$skill_md")"
+      if [[ -z "$name" ]]; then
+        name="$(basename "$abs_dir")"
+      fi
+
+      printf '%s\t%s\n' "$name" "$abs_dir"
+    done
+  done
+}
+
+# ---------------------------------------------------------------------------
+# Check dependencies
+# ---------------------------------------------------------------------------
+if ! command -v fzf &>/dev/null; then
+  echo "❌ fzf is required but not installed. Install it with: brew install fzf" >&2
+  exit 1
+fi
+
+if ! command -v claude &>/dev/null; then
+  echo "❌ claude (Claude Code) not found on PATH" >&2
+  exit 1
+fi
+
+# ---------------------------------------------------------------------------
+# Build fzf input (tab-separated: name\tpath)
+# ---------------------------------------------------------------------------
+FZF_INPUT="$(collect_skills)"
+
+if [[ -z "$FZF_INPUT" ]]; then
+  echo "No skills found in: ${SKILL_SEARCH_DIRS[*]}" >&2
+  echo "Place skill directories (with SKILL.md) in ~/.claude/skills/ or .claude/skills/" >&2
+  exit 1
+fi
+
+# ---------------------------------------------------------------------------
+# fzf multi-select — TAB to select, ENTER to confirm
+# Show only the display name, but return the full line (name + tab + path)
+# ---------------------------------------------------------------------------
+SELECTED="$(echo "$FZF_INPUT" \
+  | fzf \
+      --multi \
+      --prompt="Pick skills (TAB=select, ENTER=confirm) > " \
+      --delimiter='\t' \
+      --with-nth=1 \
+      --header="Skill                    Path" \
+      --preview='echo "$(echo {} | cut -f2)/SKILL.md" | xargs -r head -20 2>/dev/null' \
+      --preview-window='bottom:30%:wrap' \
+      --height=40%)"
+
+if [[ -z "$SELECTED" ]]; then
+  echo "No skills selected. Exiting." >&2
+  exit 0
+fi
+
+# ---------------------------------------------------------------------------
+# Extract paths and build --add-dir args
+# ---------------------------------------------------------------------------
+ADD_DIR_ARGS=()
+while IFS= read -r line; do
+  dir="$(echo "$line" | cut -f2)"
+  ADD_DIR_ARGS+=(--add-dir "$dir")
+done <<< "$SELECTED"
+
+echo "Launching claude with ${#ADD_DIR_ARGS[@]} skill directories..." >&2
+for dir in $(echo "$SELECTED" | cut -f2); do
+  echo "  → $dir" >&2
+done
+
+# ---------------------------------------------------------------------------
+# Launch claude — pass through any extra args from caller
+# ---------------------------------------------------------------------------
+exec claude "${ADD_DIR_ARGS[@]}" "$@"

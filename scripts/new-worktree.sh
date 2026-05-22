@@ -8,8 +8,8 @@ set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BRANCH="${1:?Usage: $0 <branch-name>}"
 
-# Worktrees live alongside the main repo
-WORKTREE_DIR="$(dirname "$ROOT")/_worktrees/${BRANCH//\//-}"
+# Worktrees live in /tmp for easy cleanup (cleared on reboot)
+WORKTREE_DIR="/tmp/demo_mentorcruise_webinar/${BRANCH//\//-}"
 
 # ── Port allocation ───────────────────────────────────────────────────────────
 # Reserved slots (edit here to add explicit assignments):

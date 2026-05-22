@@ -41,7 +41,7 @@ scripts/new-worktree.sh feature/filters
 
 This will:
 1. Create a git branch `feature/filters`
-2. Check out the worktree at `../  _worktrees/feature-filters/`
+2. Check out the worktree at `/tmp/demo_mentorcruise_webinar/feature-filters/`
 3. Write `.env` with the assigned ports
 4. Run `npm install` for backend and frontend
 
@@ -50,7 +50,7 @@ Output looks like:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Worktree ready
   branch:   feature/filters
-  path:     /Users/siehuaigan/project/external/_worktrees/feature-filters
+  path:     /tmp/demo_mentorcruise_webinar/feature-filters
   backend:  http://localhost:3002
   frontend: http://localhost:5174
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -60,8 +60,12 @@ Output looks like:
 
 ## Start the app in a worktree
 
+> **CRITICAL**: Always `cd` into the worktree directory before running scripts.
+> Running from the main repo starts the backend from the wrong folder, opening
+> the main repo's `todos.db` — causing "attempt to write a readonly database".
+
 ```bash
-cd /Users/siehuaigan/project/external/_worktrees/feature-filters
+cd /tmp/demo_mentorcruise_webinar/feature-filters
 scripts/start-with-log.sh all
 ```
 
@@ -90,7 +94,7 @@ git -C /Users/siehuaigan/project/external/demo_mentorcruise_webinar worktree lis
 ## Remove a worktree
 
 ```bash
-git -C /Users/siehuaigan/project/external/demo_mentorcruise_webinar worktree remove ../  _worktrees/feature-filters
+git -C /Users/siehuaigan/project/external/demo_mentorcruise_webinar worktree remove /tmp/demo_mentorcruise_webinar/feature-filters
 ```
 
 ---
@@ -98,6 +102,6 @@ git -C /Users/siehuaigan/project/external/demo_mentorcruise_webinar worktree rem
 ## Worktree locations
 
 - **Main repo**: `/Users/siehuaigan/project/external/demo_mentorcruise_webinar`
-- **Worktrees**: `/Users/siehuaigan/project/external/_worktrees/<branch-slug>/`
+- **Worktrees**: `/tmp/demo_mentorcruise_webinar/<branch-slug>/` (cleared on reboot)
 
 Each worktree is a full checkout — you can open it in a separate editor window and work independently.

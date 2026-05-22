@@ -43,7 +43,7 @@ class: text-center
 <div class="text-center">
   <div class="text-5xl mb-4">🔧</div>
   <div class="text-2xl font-bold">Harness</div>
-  <div class="mt-2 opacity-60">The environment you configure for the AI agent to run in</div>
+  <div class="mt-2 opacity-60">What's in the agent's environment</div>
 </div>
 </div>
 
@@ -56,8 +56,8 @@ class: text-center
 **Letting context rot**
 Long sessions compress old messages. AI from message 50 has forgotten what you agreed on at message 5. Use `/clear` between unrelated tasks.
 
-**No way for the AI to verify its own work**
-AI performs dramatically better when it can check itself — run tests, read logs, hit endpoints. Without that loop, it's just guessing.
+**Not letting AI run anything**
+AI codes blind. It writes code and hopes, can't run tests, can't hit endpoints, can't read logs. No way to check its own work, no way to verify fixes. It's just guessing.
 
 </div>
 
@@ -77,7 +77,7 @@ class: text-center
 <div class="p-4 rounded-lg border border-white/20">
   <div class="text-3xl mb-3">⚙️</div>
   <div class="font-bold">System prompt + tools</div>
-  <div class="mt-2 text-sm opacity-50">Set directly via settings or --system-prompt. CLAUDE.md, skills, and MCP tools also get injected into it.</div>
+  <div class="mt-2 text-sm opacity-50">Set directly via settings or --system-prompt. CLAUDE.md, system tools (Read, Grep, Write and so on)</div>
 </div>
 
 <div class="p-4 rounded-lg border border-white/20">
@@ -94,9 +94,24 @@ class: text-center
 
 </div>
 
+<!--
+Harness
+1. Claude Code demo
+2. Pi demo
+-->
+
+---
+layout: center
+class: text-center
 ---
 
-# Some tips to stay keep the context window size manageable
+# Demo — controlling what Claude sees
+
+<div class="mt-6 opacity-50 text-lg">CLAUDE.md · Skills · MCP tools — what's loaded, what's not</div>
+
+---
+
+# More tips to stay keep the context window size manageable
 
 <div class="space-y-5 mt-6 text-lg">
 
@@ -117,15 +132,6 @@ layout: center
 class: text-center
 ---
 
-# Demo — controlling what Claude sees
-
-<div class="mt-6 opacity-50 text-lg">CLAUDE.md · Skills · MCP tools — what's loaded, what's not</div>
-
----
-layout: center
-class: text-center
----
-
 # Harness
 
 ---
@@ -140,8 +146,8 @@ class: text-center
 - Fix what's wrong — without you babysitting every step
 
 **Your job as a human:**
-- Set up the environment at the start
-- Define the spec and success criteria clearly for each step
+- Set up the optimal environment at the start
+- For each requirement, define the spec and success criteria clearly
 - Validate the output at the end
 
 </div>
@@ -165,22 +171,18 @@ A folder for test reports, logs, and assertions. AI writes there; you review the
 
 ---
 
-# Write the spec and success criteria
+# When to write a spec (and when not to)
 
 <div class="space-y-5 mt-6 text-lg">
 
-**Vague prompts produce vague results**
-*"Add a filter feature"* gives you something. *"GET /todos?status=done returns only completed items, 200 OK, empty array if none"* gives you something correct.
+**Not every task needs a spec**
+For simple, well-understood changes — *"rename this field"*, *"add a missing index"* — a spec is overhead. Just describe what you want and let the AI run.
+
+**Write a spec when the requirement is complex**
+If the feature touches multiple layers, has tricky edge cases, or you can't describe it in one sentence — invest the time upfront.
 
 **The spec is the AI's exit condition**
 Without one, done means *"I stopped typing"*. With one, the AI checks itself — runs the endpoint, reads the result, fixes the delta.
-
-**Formats that work**
-- API contract: route · status code · response shape
-- Acceptance criteria: *given X, when Y, then Z*
-- A failing test the AI must make pass
-
-**Write it before the first prompt** — not after you see the output.
 
 </div>
 
