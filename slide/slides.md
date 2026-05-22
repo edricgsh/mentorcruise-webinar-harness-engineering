@@ -51,6 +51,9 @@ class: text-center
 </div>
 
 ---
+layout: center
+class: text-center
+---
 
 # The common mistakes people make
 
