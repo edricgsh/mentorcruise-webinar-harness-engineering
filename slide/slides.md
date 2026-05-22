@@ -21,11 +21,11 @@ layout: center
 class: text-center
 ---
 
-# Why does AI write great code for some people...
+# Why does AI write great code<br>for some people...
 
 ## ...and garbage for others?
 
-<div class="mt-8 text-xl opacity-60">Same model. Same tool. But wildy different experience</div>
+<div class="mt-8 text-xl opacity-50">Same model. Same tool. Wildly different experience.</div>
 
 ---
 layout: center
@@ -34,30 +34,41 @@ class: text-center
 
 # Two things decide the outcome
 
-<div class="grid grid-cols-2 gap-16 mt-10 text-left">
-<div class="text-center">
-  <div class="text-5xl mb-4">🧠</div>
-  <div class="text-2xl font-bold">Context</div>
-  <div class="mt-2 opacity-60">What's going in the context window</div>
+<div class="grid grid-cols-2 gap-16 mt-12 max-w-2xl mx-auto">
+
+<div>
+  <div class="text-6xl mb-4">🧠</div>
+  <div class="text-2xl font-bold mb-2">Context</div>
+  <div class="opacity-50 text-lg">What goes into<br>the context window</div>
 </div>
-<div class="text-center">
-  <div class="text-5xl mb-4">🔧</div>
-  <div class="text-2xl font-bold">Harness</div>
-  <div class="mt-2 opacity-60">What's in the agent's environment</div>
+
+<div>
+  <div class="text-6xl mb-4">🔧</div>
+  <div class="text-2xl font-bold mb-2">Harness</div>
+  <div class="opacity-50 text-lg">What tools the agent<br>has at its disposal</div>
 </div>
+
 </div>
 
 ---
 
 # The common mistakes people make
 
-<div class="space-y-6 mt-6 text-lg">
+<div class="grid grid-cols-2 gap-8 mt-6">
 
-**Letting context rot**
-Long sessions compress old messages. AI from message 50 has forgotten what you agreed on at message 5. Use `/clear` between unrelated tasks.
+<div class="p-5 rounded-xl bg-red-500/10 border border-red-500/20">
+  <div class="text-2xl mb-2">🪟</div>
+  <div class="text-lg font-bold mb-1">Letting context rot</div>
+  <div class="text-sm opacity-60">Long sessions compress old messages.<br>From message 50, the AI forgets what<br>you agreed on at message 5.</div>
+  <div class="mt-2 text-xs font-mono opacity-70">Use <code>/clear</code> between unrelated tasks</div>
+</div>
 
-**Not letting AI run anything**
-AI codes blind. It writes code and hopes, can't run tests, can't hit endpoints, can't read logs. No way to check its own work, no way to verify fixes. It's just guessing.
+<div class="p-5 rounded-xl bg-red-500/10 border border-red-500/20">
+  <div class="text-2xl mb-2">🙈</div>
+  <div class="text-lg font-bold mb-1">Not letting AI run anything</div>
+  <div class="text-sm opacity-60">AI codes blind — writes code and hopes.<br>No tests, no endpoints, no logs.</div>
+  <div class="mt-2 text-xs font-mono opacity-70">It's just guessing</div>
+</div>
 
 </div>
 
@@ -69,61 +80,69 @@ class: text-center
 # Context
 
 ---
+layout: center
+class: text-center
+---
 
-# What's actually in your AI's context right now?
+# What's in your AI's context right now?
 
-<div class="grid grid-cols-3 gap-8 mt-8 text-center">
+<div class="grid grid-cols-3 gap-6 mt-8 max-w-3xl mx-auto">
 
-<div class="p-4 rounded-lg border border-white/20">
+<div class="p-5 rounded-xl bg-blue-500/10 border border-blue-500/20">
   <div class="text-3xl mb-3">⚙️</div>
-  <div class="font-bold">System prompt + tools</div>
-  <div class="mt-2 text-sm opacity-50">Set directly via settings or --system-prompt. CLAUDE.md, system tools (Read, Grep, Write and so on)</div>
+  <div class="font-bold mb-1">System prompt + tools</div>
+  <div class="text-xs opacity-60">CLAUDE.md, system instructions,<br>built-in tools (Read, Write, Bash)</div>
 </div>
 
-<div class="p-4 rounded-lg border border-white/20">
+<div class="p-5 rounded-xl bg-blue-500/10 border border-blue-500/20">
   <div class="text-3xl mb-3">🛠️</div>
-  <div class="font-bold">Skills & MCP tools</div>
-  <div class="mt-2 text-sm opacity-50">Every loaded skill adds tokens. Install too many and it becomes noise.</div>
+  <div class="font-bold mb-1">Skills & MCP tools</div>
+  <div class="text-xs opacity-60">Every loaded skill costs tokens.<br>Too many becomes noise.</div>
 </div>
 
-<div class="p-4 rounded-lg border border-white/20">
+<div class="p-5 rounded-xl bg-blue-500/10 border border-blue-500/20">
   <div class="text-3xl mb-3">💬</div>
-  <div class="font-bold">Messages</div>
-  <div class="mt-2 text-sm opacity-50">Your full conversation history. Gets compressed as it grows — old context quietly disappears.</div>
+  <div class="font-bold mb-1">Message history</div>
+  <div class="text-xs opacity-60">Compressed as it grows.<br>Old context quietly disappears.</div>
 </div>
 
 </div>
-
-<!--
-Harness
-1. Claude Code demo
-2. Pi demo
--->
 
 ---
 layout: center
 class: text-center
 ---
 
-# Demo — controlling what Claude sees
+# Demo
 
-<div class="mt-6 opacity-50 text-lg">CLAUDE.md · Skills · MCP tools — what's loaded, what's not</div>
+CLAUDE.md · Skills · MCP tools —<br>what's loaded, what's not
 
 ---
+layout: center
+class: text-center
+---
 
-# More tips to stay keep the context window size manageable
+# Tips to keep context manageable
 
-<div class="space-y-5 mt-6 text-lg">
+<div class="grid grid-cols-3 gap-5 mt-8 max-w-3xl mx-auto">
 
-**Use subagents for isolated tasks**
-Keeps the main thread clean. Subagents don't pollute your context.
+<div class="p-4 rounded-xl bg-green-500/10 border border-green-500/20">
+  <div class="text-xl mb-2">🔀</div>
+  <div class="font-bold mb-1">Use subagents</div>
+  <div class="text-xs opacity-60">Isolate tasks — subagents<br>don't pollute your<br>main thread.</div>
+</div>
 
-**Load skills intentionally**
-Start with nothing. Add one when you actually need it.
+<div class="p-4 rounded-xl bg-green-500/10 border border-green-500/20">
+  <div class="text-xl mb-2">🎒</div>
+  <div class="font-bold mb-1">Load skills intentionally</div>
+  <div class="text-xs opacity-60">Start with nothing.<br>Add a skill only when<br>you need it.</div>
+</div>
 
-**Watch the status line**
-Claude Code shows token usage. Know when you're running low on runway.
-
+<div class="p-4 rounded-xl bg-green-500/10 border border-green-500/20">
+  <div class="text-xl mb-2">📊</div>
+  <div class="font-bold mb-1">Watch the status line</div>
+  <div class="text-xs opacity-60">Claude Code shows tokens.<br>Know when you're running<br>low on runway.</div>
+</div>
 
 </div>
 
@@ -135,79 +154,119 @@ class: text-center
 # Harness
 
 ---
+layout: center
+class: text-center
+---
 
 # The core idea
 
-<div class="text-xl mt-8 space-y-4">
+<div class="grid grid-cols-2 gap-12 mt-10 max-w-3xl mx-auto">
 
-**AI's job:**
-- Write the code
-- Run it and read the output
-- Fix what's wrong — without you babysitting every step
+<div class="text-left p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+  <div class="text-center text-4xl mb-4">🤖</div>
+  <div class="text-center text-xl font-bold mb-4">AI's job</div>
+  <div class="space-y-3 text-lg opacity-80">
+    <div>→ Write the code</div>
+    <div>→ Run it and read the output</div>
+    <div>→ Fix what's wrong</div>
+  </div>
+</div>
 
-**Your job as a human:**
-- Set up the optimal environment at the start
-- For each requirement, define the spec and success criteria clearly
-- Validate the output at the end
+<div class="text-left p-6 rounded-xl bg-sky-500/10 border border-sky-500/20">
+  <div class="text-center text-4xl mb-4">🧑</div>
+  <div class="text-center text-xl font-bold mb-4">Your job</div>
+  <div class="space-y-3 text-lg opacity-80">
+    <div>→ Set up the environment</div>
+    <div>→ Define spec & success criteria</div>
+    <div>→ Validate the output</div>
+  </div>
+</div>
 
 </div>
 
+---
+layout: center
+class: text-center
 ---
 
 # Setting up the environment
 
-<div class="space-y-5 mt-6 text-lg">
+<div class="grid grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
 
-**Give AI the right tools**
-Skills for log reading, API testing, and DB inspection — so it can verify its own work, not just write code and hope.
+<div class="p-5 rounded-xl bg-violet-500/10 border border-violet-500/20">
+  <div class="text-2xl mb-2">🧰</div>
+  <div class="font-bold mb-1">Give AI the right tools</div>
+  <div class="text-sm opacity-60">Skills for log reading, API testing,<br>DB inspection — so it can verify<br>its own work.</div>
+</div>
 
-**Isolate environments with git worktrees**
-Separate ports and databases per branch. Parallel features never step on each other, and AI can run two tasks simultaneously.
+<div class="p-5 rounded-xl bg-violet-500/10 border border-violet-500/20">
+  <div class="text-2xl mb-2">🌳</div>
+  <div class="font-bold mb-1">Isolate with git worktrees</div>
+  <div class="text-sm opacity-60">Separate ports & databases.<br>Parallel features never<br>step on each other.</div>
+</div>
 
-**Have a dedicated output area**
-A folder for test reports, logs, and assertions. AI writes there; you review there.
+<div class="p-5 rounded-xl bg-violet-500/10 border border-violet-500/20">
+  <div class="text-2xl mb-2">📁</div>
+  <div class="font-bold mb-1">Dedicated output area</div>
+  <div class="text-sm opacity-60">A folder for test reports, logs,<br>assertions. AI writes there —<br>you review there.</div>
+</div>
 
 </div>
 
 ---
+layout: center
+class: text-center
+---
 
-# When to write a spec (and when not to)
+# When to write a spec
 
-<div class="space-y-5 mt-6 text-lg">
+<div class="grid grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
 
-**Not every task needs a spec**
-For simple, well-understood changes — *"rename this field"*, *"add a missing index"* — a spec is overhead. Just describe what you want and let the AI run.
+<div class="p-5 rounded-xl">
+  <div class="text-2xl mb-2">✂️</div>
+  <div class="font-bold mb-1">Skip the spec</div>
+  <div class="text-sm opacity-60">Simple changes: rename a field,<br>add a missing index.<br>Just tell the AI what you want.</div>
+</div>
 
-**Write a spec when the requirement is complex**
-If the feature touches multiple layers, has tricky edge cases, or you can't describe it in one sentence — invest the time upfront.
+<div class="p-5 rounded-xl bg-amber-500/10 border border-amber-500/20">
+  <div class="text-2xl mb-2">📐</div>
+  <div class="font-bold mb-1">Write a spec</div>
+  <div class="text-sm opacity-60">Complex features that touch<br>multiple layers or have<br>tricky edge cases.</div>
+</div>
 
-**The spec is the AI's exit condition**
-Without one, done means *"I stopped typing"*. With one, the AI checks itself — runs the endpoint, reads the result, fixes the delta.
+<div class="p-5 rounded-xl bg-amber-500/10 border border-amber-500/20">
+  <div class="text-2xl mb-2">🏁</div>
+  <div class="font-bold mb-1">Spec = exit condition</div>
+  <div class="text-sm opacity-60">Without one, "done" means<br>"I stopped typing." With one,<br>the AI checks itself.</div>
+</div>
 
 </div>
 
+---
+layout: center
+class: text-center
 ---
 
 # Validate the output
 
-<div class="grid grid-cols-3 gap-8 mt-8 text-center">
+<div class="grid grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
 
-<div class="p-6 rounded-lg border border-white/20">
-  <div class="text-4xl mb-4">👁️</div>
-  <div class="text-xl font-bold">Code review</div>
-  <div class="mt-3 text-sm opacity-50">Read the diff before you ship it. AI-generated code can be subtly wrong in ways tests don't catch — logic errors, missing edge cases, security gaps.</div>
+<div class="p-5 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+  <div class="text-3xl mb-3">👁️</div>
+  <div class="font-bold mb-1">Code review</div>
+  <div class="text-sm opacity-60">Read the diff before you ship.<br>Logic errors and missing edge<br>cases won't show up in tests.</div>
 </div>
 
-<div class="p-6 rounded-lg border border-white/20">
-  <div class="text-4xl mb-4">📄</div>
-  <div class="text-xl font-bold">Read the test output</div>
-  <div class="mt-3 text-sm opacity-50">Don't just ask "did it pass?" — read what the AI actually tested. A green report with shallow assertions is still a gap.</div>
+<div class="p-5 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+  <div class="text-3xl mb-3">📄</div>
+  <div class="font-bold mb-1">Read the test output</div>
+  <div class="text-sm opacity-60">Don't just ask "did it pass?"<br>A green report with shallow<br>assertions is still a gap.</div>
 </div>
 
-<div class="p-6 rounded-lg border border-white/20">
-  <div class="text-4xl mb-4">🔍</div>
-  <div class="text-xl font-bold">Cross-check data & logs</div>
-  <div class="mt-3 text-sm opacity-50">Does the database actually contain what you expect? Do the logs show the right requests? Trust evidence, not the AI's summary of evidence.</div>
+<div class="p-5 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+  <div class="text-3xl mb-3">🔍</div>
+  <div class="font-bold mb-1">Cross-check data & logs</div>
+  <div class="text-sm opacity-60">Does the DB look right?<br>Do logs show expected requests?<br>Trust evidence, not summaries.</div>
 </div>
 
 </div>
@@ -220,6 +279,79 @@ class: text-center
 # Demo — two projects, live harness
 
 Writing two features simultaneously
+
+---
+
+# Extending further — your company's stack
+
+<div class="grid grid-cols-2 gap-4 mt-4 max-w-4xl mx-auto">
+
+<div class="p-4 rounded-xl bg-white/5 border border-white/10">
+  <div class="font-bold">📋 Log tailing</div>
+  <div class="text-xs opacity-60 mt-1">Hook into Splunk, New Relic, Datadog.<br>The agent pulls live logs, finds root causes.</div>
+</div>
+
+<div class="p-4 rounded-xl bg-white/5 border border-white/10">
+  <div class="font-bold">🔌 API testing</div>
+  <div class="text-xs opacity-60 mt-1">Beyond HTTP — gRPC, Dubbo, JSON-RPC,<br>GraphQL. Whatever your services speak.</div>
+</div>
+
+<div class="p-4 rounded-xl bg-white/5 border border-white/10">
+  <div class="font-bold">🗄️ Database access</div>
+  <div class="text-xs opacity-60 mt-1">Connect to dev DBs — verify inserts,<br>join across tables, check data integrity.</div>
+</div>
+
+<div class="p-4 rounded-xl bg-white/5 border border-white/10">
+  <div class="font-bold">☸️ Kubernetes</div>
+  <div class="text-xs opacity-60 mt-1">Spin up / down containers in test clusters.<br>Isolated environments on demand.</div>
+</div>
+
+<div class="p-4 rounded-xl bg-white/5 border border-white/10">
+  <div class="font-bold">📝 Spec writing</div>
+  <div class="text-xs opacity-60 mt-1">Connect to Jira & Confluence — pull tickets,<br>read docs, brainstorm specs together.</div>
+</div>
+
+<div class="p-4 rounded-xl bg-orange-500/10 border border-orange-500/30">
+  <div class="font-bold">🔑 One rule</div>
+  <div class="text-xs opacity-80 mt-1"><strong>Read-only</strong> by default.<br><strong>Limited write</strong> to dev. Never prod.</div>
+</div>
+
+</div>
+
+---
+layout: center
+class: text-center
+---
+
+# Reference material
+
+<div class="grid grid-cols-2 gap-4 mt-6 max-w-3xl mx-auto text-left">
+
+<div class="p-3 rounded-lg bg-white/5 border border-white/10">
+  <div class="text-xs opacity-40">langchain.com</div>
+  <div class="font-bold text-sm">The Anatomy of an Agent Harness</div>
+  <div class="text-xs opacity-60 mt-0.5">How filesystems, sandboxes, and memory<br>turn an LLM into an autonomous work engine.</div>
+</div>
+
+<div class="p-3 rounded-lg bg-white/5 border border-white/10">
+  <div class="text-xs opacity-40">mariozechner.at</div>
+  <div class="font-bold text-sm">Building an opinionated & minimal agent</div>
+  <div class="text-xs opacity-60 mt-0.5">Lessons from building pi — a from-scratch<br>coding agent with a minimal toolset.</div>
+</div>
+
+<div class="p-3 rounded-lg bg-white/5 border border-white/10">
+  <div class="text-xs opacity-40">anthropic.com</div>
+  <div class="font-bold text-sm">Effective harnesses for long-running agents</div>
+  <div class="text-xs opacity-60 mt-0.5">How state files, git, and init scripts keep<br>agents productive across many windows.</div>
+</div>
+
+<div class="p-3 rounded-lg bg-white/5 border border-white/10">
+  <div class="text-xs opacity-40">martinfowler.com</div>
+  <div class="font-bold text-sm">Harness engineering for coding agent users</div>
+  <div class="text-xs opacity-60 mt-0.5">What harness engineering means for<br>everyday developers — not just tooling teams.</div>
+</div>
+
+</div>
 
 ---
 layout: center
